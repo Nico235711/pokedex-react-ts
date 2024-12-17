@@ -18,6 +18,7 @@ export const usePokemon = () => {
   const [pokemon, setPokemon] = useState([])
   const [isDarkMode, setIsDarkMode] = useState(darkModeLS)
   const [inputChecked, setInputChecked] = useState(inputCheckedLS)
+  const [letter, setLetter] = useState("")
 
   useEffect(() => {
     (async () => {
@@ -61,11 +62,17 @@ export const usePokemon = () => {
     localStorage.setItem("inputDarkModeChecked", inputChecked)
   }, [inputChecked]);
 
+  const filteredPokemon = pokemon.filter((pokemon) => {
+    return pokemon.name.toLowerCase().includes(letter.toLowerCase())
+  })
+
   return {
-    pokemon,
+    filteredPokemon,
     isDarkMode,
     setIsDarkMode,
     inputChecked,
-    setInputChecked
+    setInputChecked,
+    letter,
+    setLetter
   }
 }
