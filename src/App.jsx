@@ -1,41 +1,27 @@
-import { useEffect } from "react";
-import { useState } from "react"
 import { PokemonDetails } from "./components/PokemonDetails";
-
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
+import { NavBar } from "./components/NavBar";
+import { usePokemon } from "./hooks/usePokemon";
 
 export default function App() {
-  const [pokemon, setPokemon] = useState([])
-  useEffect(() => {
-    (async () => {
-      // hago una peticion a la url
-      const fetchPokemon = await fetch(BASE_URL)
-      const { results } = await fetchPokemon.json()
-      // hago una peticion por cada pokemon
-      const pokemonDetails = results.map(async (pokemon) => {
-        const res = await fetch(pokemon.url)
-        const data = await res.json()
-        return {
-          id: data.id,
-          name: data.name,
-          weight: data.weight,
-          height: data.height,
-          image: data.sprites.other["official-artwork"].front_default
-        }
-      })
-      setPokemon(await Promise.all(pokemonDetails))
-    })()
-  }, []);
+
+  const { pokemon, isDarkMode, setIsDarkMode, inputChecked, setInputChecked } = usePokemon()
+  const darkModeStyle = isDarkMode ? "from-[#141E30] to-[#243B55]" : "from-red-500 to-orange-500 "
 
   return (
     <>
-      <header className="p-5 bg-gradient-to-tr from-red-500 to-orange-500">
+      <header className={`${darkModeStyle} flex items-center justify-between p-5 bg-gradient-to-tr shadow-lg sticky top-0 z-50`}>
         <img src="/logo.png" alt="Logo de la Pokedex" />
+        <NavBar
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          inputChecked={inputChecked}
+          setInputChecked={setInputChecked}
+        />
       </header>
 
       <main className="container mx-auto my-5">
-        <h1 className="text-4xl font-black text-center text-[#e5e7eb]">Pokedex</h1>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 mt-5">
+        <h1 className={`${isDarkMode ? "text-white" : ""} text-4xl font-black text-center`}>Pokedex</h1>
+        <div className="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 lg:grid-cols-3">
           {pokemon.map((pokemon) => (
             <PokemonDetails key={pokemon.id} pokemon={pokemon} />
           ))}
