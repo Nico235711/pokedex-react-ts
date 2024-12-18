@@ -1,49 +1,35 @@
-import { PokemonDetails } from "./components/PokemonDetails";
-import { NavBar } from "./components/NavBar";
-import { usePokemon } from "./hooks/usePokemon";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-// me crea un arreglo con todas las letras del abecedario
-const alphabeticLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
-
-export default function App() {
-
-  const { filteredPokemon, isDarkMode, setIsDarkMode, inputChecked, setInputChecked, setLetter, letter } = usePokemon()
-  const darkModeStyle = isDarkMode ? "from-[#141E30] to-[#243B55]" : "from-red-500 to-orange-500 "
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
     <>
-      <header className={`${darkModeStyle} flex items-center justify-between p-5 bg-gradient-to-tr shadow-lg sticky top-0 z-50`}>
-        <img src="/logo.png" alt="Logo de la Pokedex" />
-        <NavBar
-          isDarkMode={isDarkMode}
-          setIsDarkMode={setIsDarkMode}
-          inputChecked={inputChecked}
-          setInputChecked={setInputChecked}
-        />
-      </header>
-
-      <main className="container mx-auto my-5">
-        <h1 className={`${isDarkMode ? "text-white" : ""} text-4xl font-black text-center`}>Pokedex</h1>
-        <div>
-          <h2 className={`${isDarkMode ? "text-white" : ""}  text-2xl font-bold mb-5`}>Búsqueda por letra</h2>
-          {
-            alphabeticLetters.map(letter => (
-              <button
-                key={letter}
-                className={"m-1 px-4 py-2 rounded bg-slate-600 text-white hover:scale-110 transition-all"}
-                onClick={() => setLetter(letter)}
-              >
-                {letter}
-              </button>
-            ))
-          }
-        </div>
-        <div className="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 lg:grid-cols-3">
-          {filteredPokemon.map((pokemon) => (
-            <PokemonDetails key={pokemon.id} pokemon={pokemon} />
-          ))}
-        </div>
-      </main>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </>
   )
 }
+
+export default App
