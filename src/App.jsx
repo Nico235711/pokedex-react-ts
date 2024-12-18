@@ -30,7 +30,7 @@ export default function App() {
             alphabeticLetters.map(letter => (
               <button
                 key={letter}
-                className="m-1 px-4 py-2 rounded bg-slate-600 text-white hover:scale-110 transition-all"
+                className={"m-1 px-4 py-2 rounded bg-slate-600 text-white hover:scale-110 transition-all"}
                 onClick={() => setLetter(letter)}
               >
                 {letter}

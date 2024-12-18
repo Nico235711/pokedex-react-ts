@@ -63,7 +63,7 @@ export const usePokemon = () => {
   }, [inputChecked]);
 
   const filteredPokemon = pokemon.filter((pokemon) => {
-    return pokemon.name.toLowerCase().includes(letter.toLowerCase())
+    return pokemon.name.toLowerCase().startsWith(letter.toLowerCase())
   })
 
   return {
