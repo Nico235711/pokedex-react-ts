@@ -85,7 +85,7 @@ export default function App() {
           ))}
           <button
             type="button"
-            className={`${darkMode ? 'bg-gray-800 via-gray-900 to-black' : 'from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600'} col-span-1 md:col-span-2 lg:col-span-3 text-white bg-gradient-to-r  p-5 rounded-md shadow-md   transition-all`}
+            className={`${darkMode ? 'from-gray-800 via-gray-900 to-black' : 'from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600'} col-span-1 md:col-span-2 lg:col-span-3 text-white bg-gradient-to-r  p-5 rounded-md shadow-md capitalize transition-all`}
             onClick={seeMorePokemons}
           >Mostrar Más</button>
         </div>
