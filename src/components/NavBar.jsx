@@ -1,6 +1,11 @@
 import { Moon, Sun } from "./Icons"
 
-export const NavBar = () => {
+export const NavBar = ({ darkMode, setDarkMode, setIsChecked, isChecked }) => {
+
+  const handleClick = () => {
+    setDarkMode(!darkMode)
+    setIsChecked(!isChecked)
+  }
 
   return (
     <nav className="flex items-center">
@@ -9,9 +14,11 @@ export const NavBar = () => {
         <input
           type="checkbox"
           className="peer"
+          value={darkMode}
+          onChange={handleClick}
           hidden
         />
-        <span className="bg-slate-500 w-8 h-8 rounded-full absolute top-0 left-0 peer-checked:translate-x-[150%] transition-all"></span>
+        <span className={`${isChecked ? 'translate-x-[150%]' : ''}  bg-slate-500 w-8 h-8 rounded-full absolute top-0 left-0 transition-all`}></span>
       </label>
       <Moon />
     </nav>

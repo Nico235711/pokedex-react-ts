@@ -4,10 +4,22 @@ import { PokemonDetails } from "./components/PokemonDetails";
 
 const API_URL = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
 
+const darkModeLS = () => {
+  const darkModeLocalStorage = localStorage.getItem("darkMode")
+  return darkModeLocalStorage ? JSON.parse(darkModeLocalStorage) : false
+} 
+
+const isCheckedLS = () => {
+  const isCheckedLocalStorage = localStorage.getItem("isChecked")
+  return isCheckedLocalStorage ? JSON.parse(isCheckedLocalStorage) : false
+} 
+
 export default function App() {
 
   const [pokemon, setPokemon] = useState([])
   const [nextURL, setNextURL] = useState("")
+  const [darkMode, setDarkMode] = useState(darkModeLS)
+  const [isChecked, setIsChecked] = useState(isCheckedLS)
 
   useEffect(() => {
     (async () => {
@@ -30,6 +42,14 @@ export default function App() {
     })()
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode)
+  }, [darkMode]);
+
+  useEffect(() => {
+    localStorage.setItem("isChecked", isChecked)
+  }, [isChecked]);
+
   const seeMorePokemons = async () => {
     const response = await fetch(nextURL)
     const { next, results } = await response.json()
@@ -49,7 +69,12 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header 
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
 
       <main className="max-w-5xl mx-auto">
         <h1 className="text-4xl text-center my-8">Más de 800 pokemon para ver</h1>
@@ -61,7 +86,7 @@ export default function App() {
           <button
             type="button"
             className="col-span-1 md:col-span-2 lg:col-span-3 text-white bg-gradient-to-r from-pink-500 to-violet-500 p-5 rounded-md shadow-md hover:from-pink-600 hover:to-violet-600 transition-all"
-          onClick={seeMorePokemons}
+            onClick={seeMorePokemons}
           >Mostrar Más</button>
         </div>
       </main>
