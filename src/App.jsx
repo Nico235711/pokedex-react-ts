@@ -5,7 +5,7 @@ import { ArrowUp } from "./components/Icons";
 
 export default function App() {
   
-  const { pokemons, loadMore, handleScrollUp, isScrolled } = usePokemon();  
+  const { pokemons, loadMore, handleScrollUp, isScrolled } = usePokemon();
 
   return (
     <>
@@ -28,11 +28,11 @@ export default function App() {
           onClick={loadMore}
         >Ver mas</button>
       </main>
-      <a href="#root"
+      <button
         type="button"
         className={`${isScrolled ? "translate-y-0" : "translate-y-52"} fixed bottom-5 right-5 bg-red-500 rounded-full text-white p-4 transition-all`}
         onClick={handleScrollUp}
-      ><ArrowUp /></a>
+      ><ArrowUp /></button>
     </>
   )
 }

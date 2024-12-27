@@ -63,17 +63,17 @@ export const usePokemon = () => {
     setPokemons([...pokemons, ...results]);
   }
 
-  // const handleScrollUp = () => {
-  //   window.scrollTo({
-  //     top: 0, // Lleva al inicio de la página
-  //     behavior: "smooth", // Desplazamiento suave
-  //   });  }
+  const handleScrollUp = () => {
+    window.scrollTo({
+      top: 0, // Lleva al inicio de la página
+      behavior: "smooth", // Desplazamiento suave
+    });  
+  }
 
   return {
     pokemons,
     loadMore,
-    // handleScrollUp,
-    
+    handleScrollUp,
     isScrolled
   }
 }
