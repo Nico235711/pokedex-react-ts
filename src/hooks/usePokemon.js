@@ -9,6 +9,7 @@ export const usePokemon = () => {
   const [pokemons, setPokemons] = useState([])
   const [nextURL, setNextURL] = useState("")
   const [isScrolled, setIsScrolled] = useState(false)
+  const [seeMore, setSeeMore] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +49,9 @@ export const usePokemon = () => {
   const loadMore = async () => {
     const data = await fetch(nextURL);
     const res = await data.json();
+    nextURL === null && setSeeMore(false)
     setNextURL(res.next);
+    
 
     const results = await Promise.all(res.results.map(async (pokemon) => {
       const res = await fetch(pokemon.url);
@@ -74,6 +77,7 @@ export const usePokemon = () => {
     pokemons,
     loadMore,
     handleScrollUp,
-    isScrolled
+    isScrolled,
+    seeMore
   }
 }
